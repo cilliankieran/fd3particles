@@ -1,4 +1,4 @@
-# Logo Particles - Create Paritcle Logos from Three.js & React Three Fiber
+# Logo Particles - Create Particle Logos from Three.js & React Three Fiber
 
 A React component that converts PNG logos into interactive 3D particle systems using Three.js and React Three Fiber. Features include mouse interaction, elastic animations, and customizable particle behavior.
 
