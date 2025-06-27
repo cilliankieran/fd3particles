@@ -23,10 +23,14 @@ export default function RootLayout({
       <head>
         <Script
           src="https://ethyca.fides-cdn.ethyca.com/fides.js?property_id=FDS-KSB4MF"
-          strategy="beforeInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="fides-gtm" strategy="afterInteractive">
-          {`Fides.gtm()`}
+        <Script id="fides-gtm" strategy="lazyOnload">
+          {`
+            if (typeof window !== 'undefined' && window.Fides) {
+              Fides.gtm();
+            }
+          `}
         </Script>
       </head>
       <body
