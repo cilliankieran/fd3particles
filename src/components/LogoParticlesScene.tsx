@@ -66,7 +66,7 @@ function SimpleParticleSystem({ logos, config }: { logos: LogoData[]; config: Lo
   }, []);
 
   // Create geometry and material only once
-  const { geometry, material, particleCount } = useMemo(() => {
+  const { geometry, material } = useMemo(() => {
     const allPositions: number[] = [];
     logos.forEach((logo) => {
       if (logo.particlePositions && Array.isArray(logo.particlePositions)) {
@@ -75,9 +75,9 @@ function SimpleParticleSystem({ logos, config }: { logos: LogoData[]; config: Lo
           if (Array.isArray(pos) && pos.length >= 3) {
             [x, y, z] = pos;
           } else if (pos && typeof pos === 'object' && 'x' in pos && 'y' in pos && 'z' in pos) {
-            x = (pos as any).x;
-            y = (pos as any).y;
-            z = (pos as any).z;
+            x = (pos as THREE.Vector3).x;
+            y = (pos as THREE.Vector3).y;
+            z = (pos as THREE.Vector3).z;
           } else {
             return;
           }
@@ -114,7 +114,7 @@ function SimpleParticleSystem({ logos, config }: { logos: LogoData[]; config: Lo
       opacity,
       depthWrite: false,
     });
-    return { geometry, material, particleCount: allPositions.length / 3 };
+    return { geometry, material };
   }, [logos, config.logoScale, config.particleColor]);
 
   // Store original positions, random phases, and velocities for each particle
@@ -282,7 +282,7 @@ export function LogoParticlesScene({ config }: LogoParticlesSceneProps) {
       }
       setLoading(false);
     });
-  }, [config.logoPath, config.particleCount, config.logoScale]);
+  }, [config]);
 
   if (loading || !logoData) {
     if (!loading && !logoData) {

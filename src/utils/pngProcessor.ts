@@ -85,7 +85,6 @@ export class PNGProcessor {
     logoScale: number = 1.0
   ): THREE.Vector3[] {
     const { width, height, data } = pixelData;
-    const aspect = width / height;
     // Calculate grid step size
     const totalPixels = width * height;
     const gridStep = Math.max(1, Math.floor(Math.sqrt(totalPixels / particleCount)));
